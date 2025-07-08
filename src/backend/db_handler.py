@@ -6,7 +6,7 @@ class DBHandler:
         self.cur = connection.cursor()
 
     def check_if_exists(self, input:any, lection:int):
-        self.cur.execute(f"SELECT * FROM lektion_{lection} WHERE tribe=?", (input,))
+        self.cur.execute(f"SELECT * FROM lection_{lection} WHERE tribe=?", (input,))
         result = self.cur.fetchone()
         if result is not None:
             found = True
