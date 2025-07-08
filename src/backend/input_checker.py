@@ -1,6 +1,8 @@
+from db_handler import DBHandler
 class InputChecker:
     def __init__(self):
-        self.voc = ["puell", "serv", "est", "equ", "bon"] # TODO: replace with database integration.
+        self.db = DBHandler("demo.db")
+        self.lections = 2 # TODO: adapt to frontend interface.
         self.founded = []
         self.unfounded = []
 
@@ -27,13 +29,15 @@ class InputChecker:
         for word in words:
             temp = word
             while len(temp) > 0:
-                if temp in self.voc:
-                    self.founded.append(f"{word} (tribe: {temp})")
-                    exists = True
+                for lection in range (self.lections):
+                    lection += 1 #adapted to lection names
+                    exists, result = self.db.check_if_exists(temp, lection)
+                    if exists:
+                        self.founded.append(f"{word} (Infinitive: {result[1]}, Tribe: {result[2]}, German: {result[3]}) was founded in Lection {lection}")
+                        break
+                if exists:
                     break
-                else:
-                    temp = temp[:-1]
-                    exists = False
+                temp = temp[:-1]
             if not exists:
                 self.unfounded.append(word)
     
