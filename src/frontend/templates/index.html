@@ -47,6 +47,30 @@
       cursor: pointer;
       font-size: 1rem;
     }
+    .entry {
+            background-color: #e0f7fa;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        .vocabulary_text {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-family: sans-serif;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #e0f0ff;
+        }
   </style>
 </head>
 <body>
@@ -57,7 +81,22 @@
     <button type="submit" class="submit">Check Text</button>
   </form>
 </div>
-
+<table>
+        <thead>
+            <tr>
+                <th>Vokabel</th>
+                <th>Vorhanden?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vocab in vocabs %}
+            <tr>
+                <td>{{ vocab.vocab }}</td>
+                <td>{{ vocab.in_db }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
   <script>
     const textarea = document.querySelector('.text-input');

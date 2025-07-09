@@ -19,8 +19,17 @@ def check_text(): # Checking Process in this function !!!
     splitted_text = text.split(" ")
 
     print(splitted_text)
-    
-    return render_template('index.html')
+    vocabs=[
+        {"vocab":  "Servus", "in_db":True},
+        {"vocab":  "Servus", "in_db":True},
+        {"vocab":  "Servus", "in_db":True},
+        {"vocab":  "Servus", "in_db":True},
+        {"vocab":  "Servus", "in_db":True}
+    ] #<-------- Dictonary has to be filled with the result; So vocab + result(If it exists or not in the db)
+    return render_template('index.html',vocabs=vocabs)
+
+
+
 
 
 if __name__ == '__main__':
