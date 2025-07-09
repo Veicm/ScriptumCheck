@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,request
 import webbrowser
 import threading
 
@@ -11,8 +11,16 @@ def home():
 def open_browser():
     webbrowser.open_new('http://127.0.0.1:5000/')
 
+@app.route('/check',methods=["POST"])
+def check_text(): # Checking Process in this function !!!
+    text = request.form['text_input'] #   <------Text as string
+    print(type(text))
+    
+    splitted_text = text.split(" ")
 
-
+    print(splitted_text)
+    
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
