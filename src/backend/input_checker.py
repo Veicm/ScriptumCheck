@@ -1,10 +1,11 @@
-from db_handler import DBHandler
+from .db_handler import DBHandler
 class InputChecker:
     def __init__(self):
         self.db = DBHandler("demo.db")
         self.lections = 2 # TODO: adapt to frontend interface.
         self.founded = []
         self.unfounded = []
+        self.answer = []
 
     def _remove_punctuation_marks(self, input:str) ->str:
         temp = input.replace(".", "")
@@ -18,14 +19,14 @@ class InputChecker:
         result = temp.replace(")", "")
         return result
 
-    def get_input(self):
-        sentence = "Puellae servae sunt. Equus bonus est!" # TODO: adapt to frontend interface.
-        sentence = sentence.lower()
+    def get_input(self, input):
+        #sentence = "Puellae servae sunt. Equus bonus est!" # TODO: adapt to frontend interface.
+        sentence = input.lower()
         sentence = self._remove_punctuation_marks(sentence)
         words = sentence.split()
         return words
     
-    def _check(self, words):
+    def _check(self, words: list[str]):
         for word in words:
             temp = word
             while len(temp) > 0:
@@ -34,13 +35,21 @@ class InputChecker:
                     exists, result = self.db.check_if_exists(temp, lection)
                     if exists:
                         self.founded.append(f"{word} (Infinitive: {result[1]}, Tribe: {result[2]}, German: {result[3]}) was founded in Lection {lection}")
+                        self.answer.append({"vocab": result[1], "in_db":exists})
                         break
                 if exists:
                     break
                 temp = temp[:-1]
             if not exists:
                 self.unfounded.append(word)
-    
+            #self.answer.append({"vocab": result[1], "in_db":exists})
+        return self.answer
+
+    def main(self, input: str):
+        words = self.get_input(input)
+        answer = self._check(words)
+        return answer
+
     def output(self): # TODO: adapt to frontend interface.
         input = self.get_input()
         self._check(input)
