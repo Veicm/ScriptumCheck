@@ -2,7 +2,7 @@ import sqlite3
 
 class DBHandler:
     def __init__(self, db:str="demo.db"):# TODO: replace with actual db.
-        connection = sqlite3.connect(f"../data/{db}")
+        connection = sqlite3.connect(f"data/{db}")
         self.cur = connection.cursor()
 
     def check_if_exists(self, input:any, lection:int):
