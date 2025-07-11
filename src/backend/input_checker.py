@@ -42,6 +42,7 @@ class InputChecker:
                 temp = temp[:-1]
             if not exists:
                 self.unfounded.append(word)
+                self.answer.append({"vocab": word, "in_db":exists})
             #self.answer.append({"vocab": result[1], "in_db":exists})
         return self.answer
 
