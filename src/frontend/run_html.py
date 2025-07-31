@@ -33,7 +33,7 @@ def check_text(): # Checking Process in this function !!!
 
 
 
-def main():
+def start_ui() -> None:
     threading.Timer(1.0, open_browser).start()
     app.run()
 
