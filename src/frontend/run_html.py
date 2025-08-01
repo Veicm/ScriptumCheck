@@ -17,17 +17,11 @@ def open_browser():
 def check_text(): # Checking Process in this function !!!
     text = request.form['text_input'] #   <------Text as string
     print(type(text))
-    
-    #splitted_text = text.split(" ")
+    print(request.form.getlist("Lektion[]"))
 
-    #print(splitted_text)
-    #vocabs=[
-        #{"vocab":  "Servus", "in_db":True},
-        #{"vocab":  "Servus", "in_db":True},
-        #{"vocab":  "Servus", "in_db":True},
-        #{"vocab":  "Servus", "in_db":True},
-        #{"vocab":  "Servus", "in_db":True}
-    #] #<-------- Dictonary has to be filled with the result; So vocab + result(If it exists or not in the db)
+
+
+
     vocabs = checker.main(text)
     return render_template('index.html',vocabs=vocabs)
 

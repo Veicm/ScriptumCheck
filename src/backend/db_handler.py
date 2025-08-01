@@ -9,7 +9,7 @@ class DBHandler:
         db (str): The file name of the target database in scr/data. Defaults to "vocabulary.db".
     """
     def __init__(self, db: str = "vocabulary.db"):
-        connection = sqlite3.connect(f"data/{db}",check_same_thread=False)
+        connection = sqlite3.connect(f"src/data/{db}",check_same_thread=False)
         self.cur = connection.cursor()
 
     def check_if_exists(self, input: str, lection: int) -> tuple[bool, Optional[tuple[int, str, str, str]]]:

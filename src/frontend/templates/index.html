@@ -9,28 +9,26 @@
     .main-div {
       background-color: aquamarine;
       width: 60%;
-      height: auto;
       margin: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       border-radius: 8px;
       padding: 20px;
     }
 
     .text-input {
-      width: 90%;
       padding: 12px 16px;
       font-size: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
       box-sizing: border-box;
       transition: all 0.3s ease;
-      margin-bottom: 16px;
       resize: none;
       overflow: hidden;
       min-height: 40px;
+      flex: 1;
+      width: auto;
     }
 
     .text-input:focus {
@@ -48,37 +46,52 @@
       cursor: pointer;
       font-size: 1rem;
     }
+
     .entry {
-            background-color: #e0f7fa;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 6px;
-        }
-        .vocabulary_text {
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-        table {
-            width: 80%;
-            border-collapse: collapse;
-            margin: 20px auto;
-            font-family: sans-serif;
-        }
-        th, td {
-            border: 1px solid #aaa;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #e0f0ff;
-        }
-        .dropdown {
+      background-color: #e0f7fa;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+    }
+
+    .vocabulary_text {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin: 20px auto;
+      font-family: sans-serif;
+    }
+
+    th, td {
+      border: 1px solid #aaa;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e0f0ff;
+    }
+
+    .input-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .dropdown {
       position: relative;
       display: inline-block;
     }
 
     .dropdown-button {
-      padding: 10px;
+      padding: 10px 16px;
       background-color: #3498db;
       color: white;
       border: none;
@@ -90,35 +103,23 @@
       display: none;
       position: absolute;
       background-color: white;
-      min-width: 200px;
+      min-width: 220px;
+      max-height: 300px;
+      overflow-y: auto;
       box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
       padding: 10px;
-      z-index: 1;
+      z-index: 999;
       border-radius: 5px;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
     }
 
     .dropdown-content label {
       display: block;
       margin: 5px 0;
     }
-    .input-row {
-  display: flex;
-  justify-content: center; /* zentriert Inhalt */
-  align-items: flex-start;
-  gap: 10px;
-  width: 100%;
-  margin-bottom: 16px;
-}
 
-.input-row .text-input {
-  flex: 1; /* füllt so viel Platz wie möglich */
-  width: auto; /* überschreibt width: 90% aus vorheriger Regel */
-}
-
+    .dropdown.open .dropdown-content {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -127,39 +128,16 @@
   <form action="/check" method="POST" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
 
     <div class="input-row">
-      <div class="dropdown">
-        <button class="dropdown-button">Optionen auswählen</button>
+      <div class="dropdown" id="lektionDropdown">
+        <button type="button" class="dropdown-button">Optionen auswählen</button>
         <div class="dropdown-content">
-          <label><input type="checkbox" name="Lektion 1" value="1"> Lektion 1</label>
-          <label><input type="checkbox" name="Lektion 2" value="2"> Lektion 2</label>
-          <label><input type="checkbox" name="Lektion 3" value="3"> Lektion 3</label>
-          <label><input type="checkbox" name="Lektion 4" value="4"> Lektion 4</label>
-          <label><input type="checkbox" name="Lektion 5" value="5"> Lektion 5</label>
-          <label><input type="checkbox" name="Lektion 6" value="6"> Lektion 6</label>
-          <label><input type="checkbox" name="Lektion 7" value="7"> Lektion 7</label>
-          <label><input type="checkbox" name="Lektion 8" value="8"> Lektion 8</label>
-          <label><input type="checkbox" name="Lektion 9" value="9"> Lektion 9</label>
-          <label><input type="checkbox" name="Lektion 10" value="10"> Lektion 10</label>
-          <label><input type="checkbox" name="Lektion 11" value="11"> Lektion 11</label>
-          <label><input type="checkbox" name="Lektion 12" value="12"> Lektion 12</label>
-          <label><input type="checkbox" name="Lektion 13" value="13"> Lektion 13</label>
-          <label><input type="checkbox" name="Lektion 14" value="14"> Lektion 14</label>
-          <label><input type="checkbox" name="Lektion 15" value="15"> Lektion 15</label>
-          <label><input type="checkbox" name="Lektion 16" value="16"> Lektion 16</label>
-          <label><input type="checkbox" name="Lektion 17" value="17"> Lektion 17</label>
-          <label><input type="checkbox" name="Lektion 18" value="18"> Lektion 18</label>
-          <label><input type="checkbox" name="Lektion 19" value="19"> Lektion 19</label>
-          <label><input type="checkbox" name="Lektion 20" value="20"> Lektion 20</label>
-          <label><input type="checkbox" name="Lektion 9" value="9"> Lektion 21</label>
-          <label><input type="checkbox" name="Lektion 12" value="12"> Lektion 22</label>
-          <label><input type="checkbox" name="Lektion 13" value="13"> Lektion 23</label>
-          <label><input type="checkbox" name="Lektion 14" value="14"> Lektion 24</label>
-          <label><input type="checkbox" name="Lektion 15" value="15"> Lektion 25</label>
-          <label><input type="checkbox" name="Lektion 16" value="16"> Lektion 26</label>
-          <label><input type="checkbox" name="Lektion 17" value="17"> Lektion 27</label>
-          <label><input type="checkbox" name="Lektion 18" value="18"> Lektion 28</label>
-          <label><input type="checkbox" name="Lektion 19" value="19"> Lektion 29</label>
-          <label><input type="checkbox" name="Lektion 20" value="20"> Lektion 30</label>
+          {% for i in range(1, 31) %}
+  <label>
+    <input type="checkbox" name="Lektion[]" value="{{ i }}" {% if i|string in selected_lektionen %}checked{% endif %}>
+    Lektion {{ i }}
+  </label>
+{% endfor %}
+
         </div>
       </div>
 
@@ -171,34 +149,47 @@
 </div>
 
 <table>
-        <thead>
-            <tr>
-                <th>Vokabel</th>
-                <th>Vorhanden?</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for vocab in vocabs %}
-            <tr>
-                <td>{{ vocab.vocab }}</td>
-                <td>{{ vocab.in_db }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+  <thead>
+    <tr>
+      <th>Vokabel</th>
+      <th>Vorhanden?</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for vocab in vocabs %}
+    <tr>
+      <td>{{ vocab.vocab }}</td>
+      <td>{{ vocab.in_db }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
-  <script>
-    const textarea = document.querySelector('.text-input');
+<script>
+  const textarea = document.querySelector('.text-input');
 
+  textarea.addEventListener('input', function () {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
+  });
 
-    textarea.addEventListener('input', function () {
-      this.style.height = 'auto'; 
-      this.style.height = this.scrollHeight + 'px';
-    });
+  window.addEventListener("beforeunload", function () {
+    navigator.sendBeacon("/shutdown");
+  });
 
-    window.addEventListener("beforeunload", function () {
-        navigator.sendBeacon("/shutdown");
-    });
+  // Dropdown-Logik
+  const dropdown = document.getElementById('lektionDropdown');
+  const button = dropdown.querySelector('.dropdown-button');
+
+  button.addEventListener('click', () => {
+    dropdown.classList.toggle('open');
+  });
+
+  window.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('open');
+    }
+  });
 </script>
 
 </body>
