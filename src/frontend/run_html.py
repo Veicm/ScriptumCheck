@@ -1,6 +1,8 @@
 from flask import Flask,render_template,request
 import webbrowser
 import threading
+from backend.input_checker import InputChecker
+checker = InputChecker()
 
 app = Flask(__name__)
 
@@ -16,21 +18,24 @@ def check_text(): # Checking Process in this function !!!
     text = request.form['text_input'] #   <------Text as string
     print(type(text))
     
-    splitted_text = text.split(" ")
+    #splitted_text = text.split(" ")
 
-    print(splitted_text)
-    vocabs=[
-        {"vocab":  "Servus", "in_db":True},
-        {"vocab":  "Servus", "in_db":True},
-        {"vocab":  "Servus", "in_db":True},
-        {"vocab":  "Servus", "in_db":True},
-        {"vocab":  "Servus", "in_db":True}
-    ] #<-------- Dictonary has to be filled with the result; So vocab + result(If it exists or not in the db)
+    #print(splitted_text)
+    #vocabs=[
+        #{"vocab":  "Servus", "in_db":True},
+        #{"vocab":  "Servus", "in_db":True},
+        #{"vocab":  "Servus", "in_db":True},
+        #{"vocab":  "Servus", "in_db":True},
+        #{"vocab":  "Servus", "in_db":True}
+    #] #<-------- Dictonary has to be filled with the result; So vocab + result(If it exists or not in the db)
+    vocabs = checker.main(text)
     return render_template('index.html',vocabs=vocabs)
 
 
 
-
+def start_ui() -> None:
+    threading.Timer(1.0, open_browser).start()
+    app.run()
 
 if __name__ == '__main__':
     # Browser in separatem Thread öffnen, um Flask nicht zu blockieren
