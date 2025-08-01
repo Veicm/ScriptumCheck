@@ -71,16 +71,104 @@
         th {
             background-color: #e0f0ff;
         }
+        .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-button {
+      padding: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      padding: 10px;
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content label {
+      display: block;
+      margin: 5px 0;
+    }
+    .input-row {
+  display: flex;
+  justify-content: center; /* zentriert Inhalt */
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.input-row .text-input {
+  flex: 1; /* füllt so viel Platz wie möglich */
+  width: auto; /* überschreibt width: 90% aus vorheriger Regel */
+}
+
   </style>
 </head>
 <body>
 
-  <div class="main-div">
+<div class="main-div">
   <form action="/check" method="POST" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-    <textarea name="text_input" placeholder="Text hier einfügen..." class="text-input" rows="1"></textarea>
+
+    <div class="input-row">
+      <div class="dropdown">
+        <button class="dropdown-button">Optionen auswählen</button>
+        <div class="dropdown-content">
+          <label><input type="checkbox" name="Lektion 1" value="1"> Lektion 1</label>
+          <label><input type="checkbox" name="Lektion 2" value="2"> Lektion 2</label>
+          <label><input type="checkbox" name="Lektion 3" value="3"> Lektion 3</label>
+          <label><input type="checkbox" name="Lektion 4" value="4"> Lektion 4</label>
+          <label><input type="checkbox" name="Lektion 5" value="5"> Lektion 5</label>
+          <label><input type="checkbox" name="Lektion 6" value="6"> Lektion 6</label>
+          <label><input type="checkbox" name="Lektion 7" value="7"> Lektion 7</label>
+          <label><input type="checkbox" name="Lektion 8" value="8"> Lektion 8</label>
+          <label><input type="checkbox" name="Lektion 9" value="9"> Lektion 9</label>
+          <label><input type="checkbox" name="Lektion 10" value="10"> Lektion 10</label>
+          <label><input type="checkbox" name="Lektion 11" value="11"> Lektion 11</label>
+          <label><input type="checkbox" name="Lektion 12" value="12"> Lektion 12</label>
+          <label><input type="checkbox" name="Lektion 13" value="13"> Lektion 13</label>
+          <label><input type="checkbox" name="Lektion 14" value="14"> Lektion 14</label>
+          <label><input type="checkbox" name="Lektion 15" value="15"> Lektion 15</label>
+          <label><input type="checkbox" name="Lektion 16" value="16"> Lektion 16</label>
+          <label><input type="checkbox" name="Lektion 17" value="17"> Lektion 17</label>
+          <label><input type="checkbox" name="Lektion 18" value="18"> Lektion 18</label>
+          <label><input type="checkbox" name="Lektion 19" value="19"> Lektion 19</label>
+          <label><input type="checkbox" name="Lektion 20" value="20"> Lektion 20</label>
+          <label><input type="checkbox" name="Lektion 9" value="9"> Lektion 21</label>
+          <label><input type="checkbox" name="Lektion 12" value="12"> Lektion 22</label>
+          <label><input type="checkbox" name="Lektion 13" value="13"> Lektion 23</label>
+          <label><input type="checkbox" name="Lektion 14" value="14"> Lektion 24</label>
+          <label><input type="checkbox" name="Lektion 15" value="15"> Lektion 25</label>
+          <label><input type="checkbox" name="Lektion 16" value="16"> Lektion 26</label>
+          <label><input type="checkbox" name="Lektion 17" value="17"> Lektion 27</label>
+          <label><input type="checkbox" name="Lektion 18" value="18"> Lektion 28</label>
+          <label><input type="checkbox" name="Lektion 19" value="19"> Lektion 29</label>
+          <label><input type="checkbox" name="Lektion 20" value="20"> Lektion 30</label>
+        </div>
+      </div>
+
+      <textarea name="text_input" placeholder="Text hier einfügen..." class="text-input" rows="1"></textarea>
+    </div>
+
     <button type="submit" class="submit">Check Text</button>
   </form>
 </div>
+
 <table>
         <thead>
             <tr>
@@ -106,7 +194,11 @@
       this.style.height = 'auto'; 
       this.style.height = this.scrollHeight + 'px';
     });
-  </script>
+
+    window.addEventListener("beforeunload", function () {
+        navigator.sendBeacon("/shutdown");
+    });
+</script>
 
 </body>
 </html>
