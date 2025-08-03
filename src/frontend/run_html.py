@@ -17,12 +17,12 @@ def open_browser():
 def check_text(): # Checking Process in this function !!!
     text = request.form['text_input'] #   <------Text as string
     print(type(text))
-    print(request.form.getlist("Lektion[]"))
+    active_lections=request.form.getlist("Lektion[]")
 
 
 
 
-    vocabs = checker.main(text)
+    vocabs = checker.main(text,active_lections)
     return render_template('index.html',vocabs=vocabs)
 
 
