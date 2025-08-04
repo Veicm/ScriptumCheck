@@ -16,15 +16,23 @@ def open_browser():
 @app.route('/check',methods=["POST"])
 def check_text(): # Checking Process in this function !!!
     text = request.form['text_input'] #   <------Text as string
+    
     print(type(text))
-    active_lections=request.form.getlist("Lektion[]")
+    try:
+        active_lections=request.form.getlist("Lektion[]")
+        
+        active_lections.sort(reverse=True)
+        highest_lection = active_lections[0]
+        highest_lection = int(highest_lection)
+        print(type(highest_lection))
 
+        print(active_lections)
 
-
-
-    vocabs = checker.main(text,active_lections)
-    return render_template('index.html',vocabs=vocabs)
-
+        print(highest_lection)
+        vocabs = checker.main(text,highest_lection)
+        return render_template('index.html',vocabs=vocabs)
+    except IndexError:
+        print("ERROR:  Liste ist leer!! ")
 
 
 def start_ui() -> None:

@@ -28,7 +28,7 @@
       overflow: hidden;
       min-height: 40px;
       flex: 1;
-      width: auto;
+      width: 100%;
     }
 
     .text-input:focus {
@@ -132,21 +132,24 @@
         <button type="button" class="dropdown-button">Optionen auswählen</button>
         <div class="dropdown-content">
           {% for i in range(1, 31) %}
-  <label>
-    <input type="checkbox" name="Lektion[]" value="{{ i }}" {% if i|string in selected_lektionen %}checked{% endif %}>
-    Lektion {{ i }}
-  </label>
-{% endfor %}
-
+            <label>
+              <input type="checkbox" class="lektion-checkbox" name="Lektion[]" value="{{ i }}" {% if i|string in selected_lektionen %}checked{% endif %}>
+              Lektion {{ i }}
+            </label>
+          {% endfor %}
         </div>
       </div>
+    </div>
 
+    <div class="input-row" style="width: 100%;">
       <textarea name="text_input" placeholder="Text hier einfügen..." class="text-input" rows="1"></textarea>
     </div>
 
     <button type="submit" class="submit">Check Text</button>
+    
   </form>
 </div>
+
 
 <table>
   <thead>
@@ -169,9 +172,10 @@
   const textarea = document.querySelector('.text-input');
 
   textarea.addEventListener('input', function () {
-    this.style.height = 'auto';
-    this.style.height = this.scrollHeight + 'px';
-  });
+  this.style.height = 'auto';
+  this.style.height = Math.max(this.scrollHeight, 40) + 'px';  // bleibt mindestens 40px
+});
+
 
   window.addEventListener("beforeunload", function () {
     navigator.sendBeacon("/shutdown");
@@ -190,7 +194,26 @@
       dropdown.classList.remove('open');
     }
   });
+
+  // ✅ Checkbox-Zustände lokal speichern
+  const storageKey = 'lektionCheckboxes';
+  const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+  const checkboxes = document.querySelectorAll('input[type="checkbox"][name="Lektion[]"]');
+
+  checkboxes.forEach(checkbox => {
+    const value = checkbox.value;
+
+    // Wiederherstellen
+    if (saved[value]) checkbox.checked = true;
+
+    // Beim Ändern speichern
+    checkbox.addEventListener('change', () => {
+      saved[value] = checkbox.checked;
+      localStorage.setItem(storageKey, JSON.stringify(saved));
+    });
+  });
 </script>
+
 
 </body>
 </html>
