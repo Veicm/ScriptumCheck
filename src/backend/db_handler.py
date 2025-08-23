@@ -28,7 +28,7 @@ class DBHandler:
                     - A tuple with the database row values (id, vocab, tribe, german translation)  
                     if found, or None if no match was found.
         """
-        self.cur.execute(f"SELECT * FROM lection_{lection} WHERE tribe=?", (input,))# TODO: Replace tribe with steam 
+        self.cur.execute(f"SELECT * FROM lection_{lection} WHERE steam=?", (input,))
         result: Optional[tuple[int, str, str, str]] = self.cur.fetchone()
         if result is not None:
             found: bool = True

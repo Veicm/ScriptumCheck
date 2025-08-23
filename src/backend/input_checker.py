@@ -47,7 +47,7 @@ class InputChecker:
         words: list[str] = sentence.split()
         return words
     
-    def _check(self, words: list[str], lections: int = 2, extended: bool = False) -> list[dict[str, bool]]: #TODO: remove default value for lections when integrated.
+    def _check(self, words: list[str], lections: int, extended: bool = False) -> list[dict[str, bool]]:
         """
         Checks whether the given words exist in the database across the specified number of lections.
 
@@ -96,7 +96,7 @@ class InputChecker:
         elif extended:
             return answer, founded, unfounded
 
-    def main(self, input: str, lections: int = 2) -> list[dict[str, bool]]:# TODO: Remove default value for lection when integrated.
+    def main(self, input: str, lections: int) -> list[dict[str, bool]]:
         """
         The main function of the class which is used to check if the words in a text can be found in the DB.
 
